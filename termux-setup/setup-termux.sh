@@ -25,9 +25,8 @@ chmod +x $PREFIX/bin/frpc
 rm -rf frp.tar.gz frp_${FRP_VERSION}_linux_arm64
 
 # 5. Copiaza config FRP
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 mkdir -p ~/.config/frp
-cp "$SCRIPT_DIR/frpc.toml" ~/.config/frp/frpc.toml
+cp ~/ukemc/termux-setup/frpc.toml ~/.config/frp/frpc.toml
 
 # 6. Creeaza script pornire
 cat > ~/start-ssh-frp.sh << 'EOF'
