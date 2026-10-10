@@ -1,18 +1,14 @@
-# FRP Client Configuration for Termux
-# Server info
 serverAddr = "140.238.218.210"
 serverPort = 7000
 auth.token = "minecraft12345"
 
-# SSH proxy - forward remote port 6000 to local SSH (port 8022 on Termux)
 [[proxies]]
 name = "ssh"
 type = "tcp"
 localIP = "127.0.0.1"
 localPort = 8022
-remotePort = 6000
+remotePort = 8022
 
-# Web panel proxy
 [[proxies]]
 name = "webpanel"
 type = "tcp"
@@ -20,7 +16,6 @@ localIP = "127.0.0.1"
 localPort = 8081
 remotePort = 8081
 
-# Minecraft proxy
 [[proxies]]
 name = "minecraft"
 type = "tcp"
