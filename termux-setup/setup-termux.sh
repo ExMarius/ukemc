@@ -16,8 +16,20 @@ echo "[1/5] Updating packages..."
 pkg update -y && pkg upgrade -y
 
 echo ""
-echo "[2/5] Installing openssh, frp..."
-pkg install -y openssh frpc
+echo "[2/5] Installing openssh..."
+pkg install -y openssh
+
+echo ""
+echo "[2.5/5] Downloading FRP client (ARM64)..."
+FRP_VERSION="0.61.1"
+FRP_URL="https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/frp_${FRP_VERSION}_linux_arm64.tar.gz"
+cd ~
+curl -L -o frp.tar.gz "$FRP_URL"
+tar xzf frp.tar.gz
+cp frp_${FRP_VERSION}_linux_arm64/frpc $PREFIX/bin/frpc
+chmod +x $PREFIX/bin/frpc
+rm -rf frp.tar.gz frp_${FRP_VERSION}_linux_arm64
+echo "  frpc instalat in $PREFIX/bin/frpc"
 
 # --- 2. Setup SSH ---
 echo ""
