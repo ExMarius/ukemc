@@ -17,25 +17,27 @@ sshd
 
 # 4. Descarca FRP ARM64
 FRP_VERSION="0.61.1"
-cd ~
+cd "$HOME"
 curl -L -o frp.tar.gz "https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/frp_${FRP_VERSION}_linux_arm64.tar.gz"
 tar xzf frp.tar.gz
-cp frp_${FRP_VERSION}_linux_arm64/frpc $PREFIX/bin/frpc
-chmod +x $PREFIX/bin/frpc
-rm -rf frp.tar.gz frp_${FRP_VERSION}_linux_arm64
+cp "frp_${FRP_VERSION}_linux_arm64/frpc" "$PREFIX/bin/frpc"
+chmod +x "$PREFIX/bin/frpc"
+rm -rf frp.tar.gz "frp_${FRP_VERSION}_linux_arm64"
 
-# 5. Copiaza config FRP
-mkdir -p ~/.config/frp
-cp ~/ukemc/termux-setup/frpc.toml ~/.config/frp/frpc.toml
+# 5. Copiaza config FRP - ia frpc.toml din acelasi director cu scriptul
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+mkdir -p "$HOME/.config/frp"
+cp "$SCRIPT_DIR/frpc.toml" "$HOME/.config/frp/frpc.toml"
+echo "Config copiat din: $SCRIPT_DIR/frpc.toml"
 
 # 6. Creeaza script pornire
-cat > ~/start-ssh-frp.sh << 'EOF'
+cat > "$HOME/start-ssh-frp.sh" << 'EOF'
 #!/data/data/com.termux/files/usr/bin/bash
 sshd
 echo "SSH pornit pe port 8022"
-frpc -c ~/.config/frp/frpc.toml
+frpc -c /data/data/com.termux/files/home/.config/frp/frpc.toml
 EOF
-chmod +x ~/start-ssh-frp.sh
+chmod +x "$HOME/start-ssh-frp.sh"
 
 echo ""
 echo "=== GATA! ==="
